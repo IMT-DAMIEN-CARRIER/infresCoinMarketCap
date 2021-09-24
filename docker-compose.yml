@@ -3,9 +3,9 @@ services:
   client:
     ports:
       - "3001:3001"
-    image: dams38/infrescoinmarketcap/client
+    image: dams38/infrescoinmarketcap_client
     links: api
   api:
-    image: dams38/infrescoinmarketcap/api
+    image: dams38/infrescoinmarketcap_api
     ports:
       - "3000:3000"
