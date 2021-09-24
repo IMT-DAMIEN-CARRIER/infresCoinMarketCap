@@ -5,38 +5,6 @@ on:
     - main
     - feature/*
 jobs:
-  build-api:
-    name: Build api solution
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-      - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-      - run: sleep 2
-      - run: curl -I http://localhost:3000/ | grep "200 OK"
-  build-client:
-    name: Build client solution
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
-      - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
-      - run: sleep 2
-      - run: curl -I http://localhost:3000/ | grep "200 OK"
   publish-api:
     needs: build-api
     name: Push Docker image to Docker Hub
@@ -49,6 +17,7 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
       - run: docker push ${{ secrets.DOCKER_USERNAME  }}/infrescoinmarketcap_api
   publish-client:
     needs: build-client
@@ -62,4 +31,5 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
       - run: docker push ${{ secrets.DOCKER_USERNAME  }}/infrescoinmarketcap_client
