@@ -17,10 +17,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-      - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap/api
+      - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap/api
       - run: sleep 2
-      - run: curl -I http://localhost:3000/ |grep "200 OK"
+      - run: curl -I http://localhost:3000/ | grep "200 OK"
   build-client:
     name: Build client solution
     runs-on: ubuntu-latest
@@ -33,10 +33,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-      - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap/client
+      - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap/client
       - run: sleep 2
-      - run: curl -I http://localhost:3000/ |grep "200 OK"
+      - run: curl -I http://localhost:3000/ | grep "200 OK"
   publish-api:
     needs: build-api
     name: Push Docker image to Docker Hub
@@ -72,6 +72,6 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: docker build client/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap/client
       - run: docker push ${{ secrets.DOCKER_USERNAME  }}/infrescoinmarketcap/client
