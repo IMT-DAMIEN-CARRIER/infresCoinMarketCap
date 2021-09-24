@@ -1,0 +1,27 @@
+name: github-actions-ci
+on:
+  push:
+    branches:
+    - main
+    - feature/*
+  pull_request:
+    branches:
+    - main
+jobs:
+  build-api:
+    name: Build solution
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.17.6]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Build project
+    - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+    - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+    - run: curl -I http://localhost:3000/ |grep "200 OK"
