@@ -23,4 +23,5 @@ jobs:
         cache: 'npm'
     - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
     - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+    - run: sleep 2
     - run: curl -I http://localhost:3000/ |grep "200 OK"
