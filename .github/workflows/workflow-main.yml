@@ -1,0 +1,87 @@
+name: workflow-main
+on:
+  push:
+    branches:
+    - main
+    - feature/*
+jobs:
+  build-api:
+    name: Build api solution
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+    - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+    - run: sleep 2
+    - run: curl -I http://localhost:3000/ |grep "200 OK"
+  build-client:
+    name: Build client solution
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+    - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+    - run: sleep 2
+    - run: curl -I http://localhost:3000/ |grep "200 OK"
+  publish-api:
+    needs: build-api
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: dams38/infrescoinmarketcap/api
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api:latest
+          labels: infrescoinmarketcap_api
+  publish-client:
+    needs: build-client
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: dams38/infrescoinmarketcap/api
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client:latest
+          labels: infrescoinmarketcap_client
