@@ -1,9 +1,5 @@
 name: workflow-branches
 on:
-  push:
-    branches:
-    - feature/*
-    - hotfix/*
   pull_request:
     branches:
       - main
