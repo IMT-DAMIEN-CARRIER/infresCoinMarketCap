@@ -35,6 +35,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: docker build client/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
     - run: docker run -p 3001:3001 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
-    - run: sleep 2
+    - run: sleep 10
     - run: docker ps -a
     - run: curl -I http://localhost:3001/ | grep "200 OK"
