@@ -20,6 +20,7 @@ jobs:
     - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
     - run: sleep 2
     - run: curl -I http://localhost:3000/ | grep "200 OK"
+
   build-client:
     name: Build client solution
     runs-on: ubuntu-latest
