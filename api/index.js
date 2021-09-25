@@ -10,7 +10,12 @@ app.get('/', async (req, res, next) => {
   let order = 'rank_asc';
   try {
     let result = await axios.get('https://coinlib.io/api/v1/coinlist', { params: { key: key, pref: currency, page: page, order: order} });
-    res.send(result.data);
+
+    let crypto = [];
+    result.data.coins.forEach(coin => {
+      crypto.push( {symbol: coin.show_symbol, name: coin.name, rank: coin.rank, price: coin.price, delta_24h: coin.delta_24h } );
+    });
+    res.send(crypto);
   } catch (err) {
     next(err);
   }
