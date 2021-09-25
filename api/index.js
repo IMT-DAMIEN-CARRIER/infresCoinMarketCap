@@ -4,9 +4,24 @@ const port = 3000
 const axios = require('axios').default;
 const key = '0f3f5c279b7bfe4e'
 
-app.get('/', (req, res) => {
-  res.send('Welcome on board !')
+app.get('/', async (req, res, next) => {
+  let currency = 'USD'
+  let page = '1'
+  let order = 'rank_asc';
+
+  axios.get('https://coinlib.io/api/v1/coinlist', { params: { key: key, pref: currency, page: page, order: order} })
+      .then((data) => {
+        return {
+          coins: data.coins,
+          remaining: data.remaining,
+          last_update: data.last_updated_timestamp
+        };
+      })
+      .catch((error) => {
+        console.error(error);
+      })
 });
+
 
 app.get('/coin', (req, res, next) => {
   let reqSymbol = req.query.symbol;
