@@ -16,7 +16,6 @@ app.get('/', async (req, res, next) => {
   }
 });
 
-
 app.get('/coin', (req, res, next) => {
   let reqSymbol = req.query.symbol;
   let symbol = (reqSymbol !== '') ? reqSymbol : 'BTC';
