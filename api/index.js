@@ -6,9 +6,10 @@ const key = '0f3f5c279b7bfe4e'
 
 app.get(`/getinfoscoin`, async (req, res, next) => {
   try {
-    let symbol = (req.query.symbol != '') ? req.query.symbol : 'BTC';
+    let symbol = (req.query.symbol !== '') ? req.query.symbol : 'BTC';
     let res = await axios.get('https://coinlib.io/api/v1/coin', { params: { key: key, symbol: symbol } });
     let data = res.data;
+    console.log(data);
     return {
       symbol: data.symbol,
       nom: data.name,
