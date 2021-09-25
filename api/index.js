@@ -4,6 +4,10 @@ const port = 3000
 const axios = require('axios').default;
 const key = '0f3f5c279b7bfe4e'
 
+app.get('/', (req, res) => {
+  res.send('Welcome on board !')
+});
+
 app.get(`/getinfoscoin`, async (req, res, next) => {
   try {
     let reqSymbol = req.query.symbol;
