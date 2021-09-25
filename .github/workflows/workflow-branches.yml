@@ -33,7 +33,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-    - run: docker run -p 3001:3001 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+    - run: docker build client/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
+    - run: docker run -p 3001:3001 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
     - run: sleep 2
     - run: curl -I http://localhost:3001/ | grep "200 OK"
