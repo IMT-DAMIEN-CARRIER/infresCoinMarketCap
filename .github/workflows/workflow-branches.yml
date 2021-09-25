@@ -18,7 +18,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
     - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-    - run: sleep 5
+    - run: sleep 2
     - run: curl -I http://localhost:3000/ | grep "200 OK"
   build-client:
     name: Build client solution
@@ -34,5 +34,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
     - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-    - run: sleep 5
+    - run: sleep 2
     - run: curl -I http://localhost:3000/ | grep "200 OK"
