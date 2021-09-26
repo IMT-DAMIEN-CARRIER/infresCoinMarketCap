@@ -9,31 +9,33 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [ 14.x ]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-    - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
-    - run: sleep 10
-    - run: curl -I http://localhost:3000/ | grep "200 OK"
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+      - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
+      - run: sleep 10
+      - run: curl -I "http://localhost:3000/" | grep "200 OK"
+      - run: curl -I "http://localhost:3000/global" | grep "200 OK"
+      - run: curl -I "http://localhost:3000/coin?symbol=MATIC" | grep "200 OK"
 
   build-client:
     name: Build client solution
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [ 14.x ]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: docker build client/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
-    - run: docker run -p 3001:3001 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
-    - run: sleep 10
-    - run: curl -I http://localhost:3001/ | grep "200 OK"
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: docker build client/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
+      - run: docker run -p 3001:3001 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_client
+      - run: sleep 10
+      - run: curl -I http://localhost:3001/ | grep "200 OK"

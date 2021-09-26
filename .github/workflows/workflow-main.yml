@@ -2,7 +2,7 @@ name: workflow-main
 on:
   push:
     branches:
-    - main
+      - main
 jobs:
   publish-api:
     name: Push Docker image to Docker Hub
