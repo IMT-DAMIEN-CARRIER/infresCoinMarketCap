@@ -19,9 +19,8 @@ jobs:
       - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
       - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
       - run: sleep 10
-      - run: curl -I "http://localhost:3000/" | grep "200 OK"
-      - run: curl -I "http://localhost:3000/global" | grep "200 OK"
-      - run: curl -I "http://localhost:3000/coin?symbol=MATIC" | grep "200 OK"
+      - run: cd api/
+      - run: npm test
 
   build-client:
     name: Build client solution
