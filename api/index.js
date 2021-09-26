@@ -5,7 +5,24 @@ const axios = require('axios').default;
 const key = '0f3f5c279b7bfe4e'
 
 app.get('/', (req, res) => {
-    res.send('Welcome on board !')
+    const currency = 'USD';
+    const page = '1';
+    const order = 'rank_asc';
+
+    axios.get('https://coinlib.io/api/v1/coinlist', { params: { key: key, pref: currency, page: page, order: order} })
+        .then((results) => {
+            const data = results.data;
+            let crypto = [];
+
+            data.coins.forEach(coin => {
+              crypto.push( {symbol: coin.show_symbol, name: coin.name, rank: coin.rank, price: coin.price, delta_24h: coin.delta_24h } );
+            });
+
+            res.send(crypto);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 });
 
 app.get('/coin', (req, res) => {
