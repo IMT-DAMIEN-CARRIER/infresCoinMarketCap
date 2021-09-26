@@ -4,21 +4,25 @@ const port = 3000
 const axios = require('axios').default;
 const key = '0f3f5c279b7bfe4e'
 
-app.get('/', async (req, res, next) => {
-  let currency = 'USD'
-  let page = '1'
-  let order = 'rank_asc';
-  try {
-    let result = await axios.get('https://coinlib.io/api/v1/coinlist', { params: { key: key, pref: currency, page: page, order: order} });
+app.get('/', (req, res) => {
+    const currency = 'USD';
+    const page = '1';
+    const order = 'rank_asc';
 
-    let crypto = [];
-    result.data.coins.forEach(coin => {
-      crypto.push( {symbol: coin.show_symbol, name: coin.name, rank: coin.rank, price: coin.price, delta_24h: coin.delta_24h } );
-    });
-    res.send(crypto);
-  } catch (err) {
-    next(err);
-  }
+    axios.get('https://coinlib.io/api/v1/coinlist', { params: { key: key, pref: currency, page: page, order: order} })
+        .then((results) => {
+            const data = results.data;
+            let crypto = [];
+
+            data.coins.forEach(coin => {
+              crypto.push( {symbol: coin.show_symbol, name: coin.name, rank: coin.rank, price: coin.price, delta_24h: coin.delta_24h } );
+            });
+
+            res.send(crypto);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 });
 
 app.get('/coin', (req, res) => {
