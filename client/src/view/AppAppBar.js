@@ -12,7 +12,7 @@ function AppAppBar() {
                     <Box sx={{flex: 1}}/>
                     <Link
                         variant="h6"
-                        underline="none"
+                        underline='none'
                         color="inherit"
                         href="/"
                         sx={{fontSize: 18}}
