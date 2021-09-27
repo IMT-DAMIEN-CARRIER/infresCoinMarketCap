@@ -25,7 +25,7 @@ function CoinsListIndex() {
 
 var url = window.location.href.replace('http://localhost:3001','');
 
-if (url == '/') {
+if (url === '/') {
   AppIndex();
 } else {
   CoinsListIndex();
