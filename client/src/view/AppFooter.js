@@ -23,7 +23,7 @@ export default function AppFooter() {
                     <Grid
                         container
                         direction='column'
-                        justifyContent="flex-end"
+                        justifyContent='flex-end'
                         spacing={2}
                         sx={{height: 120}}
                     >
