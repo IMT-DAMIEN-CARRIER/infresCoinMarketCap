@@ -11,7 +11,7 @@ function AppAppBar() {
                 <Toolbar sx={{justifyContent: 'space-between'}}>
                     <Box sx={{flex: 1}}/>
                     <Link
-                        variant="h6"
+                        variant='h6'
                         underline='none'
                         color='inherit'
                         href='/'
