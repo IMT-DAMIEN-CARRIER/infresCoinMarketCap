@@ -14,7 +14,7 @@ function AppAppBar() {
                         variant="h6"
                         underline='none'
                         color='inherit'
-                        href="/"
+                        href='/'
                         sx={{fontSize: 18}}
                     >
                         {'Infres CoinMarketCap'}
