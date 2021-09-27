@@ -5,7 +5,7 @@ describe('Test endpoint \'/coin\'', async function() {
     describe('Verification generale', async function() {
         it('On doit recevoir 12 champs', async function() {
             const symbol = 'BTC';
-            let data = await axios.get(`http://localhost:3000/coin?symbol=${symbol}`)
+            const data = await axios.get(`http://localhost:3000/coin?symbol=${symbol}`)
                 .then((results) => {
                     return results.data;
                 })
@@ -31,7 +31,7 @@ describe('Test endpoint \'/coin\'', async function() {
         })
         it('On reçoit bien les informations de la crypto spécifié (BTC)', async function() {
             const symbol = 'BTC';
-            let data = await axios.get(`http://localhost:3000/coin?symbol=${symbol}`)
+            const data = await axios.get(`http://localhost:3000/coin?symbol=${symbol}`)
                 .then((results) => {
                     return results.data;
                 })
@@ -46,8 +46,8 @@ describe('Test endpoint \'/coin\'', async function() {
             assert.equal(data.rang, 1);
         })
         it('On reçoit bien les informations de la crypto spécifié (ETH)', async function() {
-            const symbol = 'BTC';
-            let data = await axios.get(`http://localhost:3000/coin?symbol=${symbol}`)
+            const symbol = 'ETH';
+            const data = await axios.get(`http://localhost:3000/coin?symbol=${symbol}`)
                 .then((results) => {
                     return results.data;
                 })

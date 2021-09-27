@@ -4,7 +4,7 @@ var assert = require('assert');
 describe('Test endpoint \'/global\'', async function() {
     describe('Verification generale', async function() {
         it('On doit recevoir 4 champs', async function() {
-            let data = await axios.get('http://localhost:3000/global')
+            const data = await axios.get('http://localhost:3000/global')
                 .then((results) => {
                     return results.data;
                 })
@@ -21,7 +21,7 @@ describe('Test endpoint \'/global\'', async function() {
             assert.ok(data.total_volume_24h);
         })
         it('Par défaut, les infos reçues sont en US Dollars', async function() {
-            let data_default_request = await axios.get('http://localhost:3000/global')
+            const data_default_request = await axios.get('http://localhost:3000/global')
                 .then((results) => {
                     return results.data;
                 })
@@ -30,7 +30,7 @@ describe('Test endpoint \'/global\'', async function() {
                 }).then((data) => {
                     return data;
                 });
-            let data_specified_usd = await axios.get('http://localhost:3000/global?currency=USD')
+            const data_specified_usd = await axios.get('http://localhost:3000/global?currency=USD')
                 .then((results) => {
                     return results.data;
                 })
