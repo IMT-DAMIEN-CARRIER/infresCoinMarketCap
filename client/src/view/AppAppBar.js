@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from '@mui/material/Link';
 import AppBar from '../components/AppBar';
 import Toolbar from '../components/Toolbar';
-import {Box} from "@mui/material";
+import {Box} from '@mui/material';
 
 function AppAppBar() {
     return (
