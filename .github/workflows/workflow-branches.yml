@@ -19,8 +19,7 @@ jobs:
       - run: docker build api/. -t ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
       - run: docker run -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/infrescoinmarketcap_api
       - run: sleep 10
-      - run: cd api/
-      - run: npm test
+      - run: npm test --prefix api/
 
   build-client:
     name: Build client solution
