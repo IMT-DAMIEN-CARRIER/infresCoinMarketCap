@@ -41,28 +41,28 @@ function Global() {
                 <Grid container>
                     <Grid item xs={12} md={3}>
                         <Box sx={item}>
-                            <Typography variant="body2" sx={{my: 2}}>
+                            <Typography variant='body2' sx={{my: 2}}>
                                 Numbers of coins : {(global) ? global?.coins : ''}
                             </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Box sx={item}>
-                            <Typography variant="body2" sx={{my: 2}}>
+                            <Typography variant='body2' sx={{my: 2}}>
                                 Numbers of Markets : {(global) ? global?.markets : ''}
                             </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Box sx={item}>
-                            <Typography variant="body2" sx={{my: 2}}>
+                            <Typography variant='body2' sx={{my: 2}}>
                                 Total Market Cap : {(global) ? '$' + global?.total_market_cap : ''}
                             </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Box sx={item}>
-                            <Typography variant="body2" sx={{my: 2}}>
+                            <Typography variant='body2' sx={{my: 2}}>
                                 Total Volume in 24h : {(global) ? '$' + global?.total_volume_24h : ''}
                             </Typography>
                         </Box>
