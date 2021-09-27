@@ -23,8 +23,6 @@ function Global() {
     const refreshGlobal = () => {
         axios.get('http://localhost:3000/global')
             .then(results => {
-                console.log(results);
-
                 if (results.data) {
                     setGlobal(results.data);
                 } else {
