@@ -64,7 +64,7 @@ function Global() {
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Box sx={item}>
-                            <Typography variant="body2" sx={{my: 2}}>
+                            <Typography variant='body2' sx={{my: 2}}>
                                 Total Volume in 24h : {(global) ? '$' + global?.total_volume_24h : ''}
                             </Typography>
                         </Box>
