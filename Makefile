@@ -23,7 +23,9 @@ down: ;@echo "Arrêt total de l'environnement de dev ${PROJECT}${DELIMITER}"; \
 	docker stop ${CLIENT_CONTAINER_NAME}; \
 	docker stop ${API_CONTAINER_NAME}; \
 	docker rm ${CLIENT_CONTAINER_NAME}; \
-	docker rm ${API_CONTAINER_NAME}; \
+	docker rm ${API_CONTAINER_NAME};
+
+clear: down ;@echo "Suppression des images docker du projet ${PROJECT}${DELIMITER}"; \
 	docker image rm ${CLIENT_IMAGE_NAME}; \
 	docker image rm ${API_IMAGE_NAME}
 
