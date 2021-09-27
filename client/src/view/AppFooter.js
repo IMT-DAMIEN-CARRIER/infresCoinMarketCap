@@ -6,7 +6,7 @@ import Typography from '../components/Typography';
 function Copyright() {
     return (
         <React.Fragment>
-            {'© Léon bousquet - Damien Carrier - Arthur Duca - Clément Savinaud'}
+            {'© Léon bousquet - Damien Carrier - Arthur Duca - Clément Savinaud '}
             {new Date().getFullYear()}
         </React.Fragment>
     );

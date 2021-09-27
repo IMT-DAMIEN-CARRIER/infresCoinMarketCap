@@ -9,6 +9,16 @@ function AppAppBar() {
         <div>
             <AppBar position='fixed'>
                 <Toolbar sx={{justifyContent: 'space-between'}}>
+                    <Box sx={{flex: 0}}/>
+                    <Link
+                        variant='h6'
+                        underline='none'
+                        color='inherit'
+                        href='/CoinsList/'
+                        sx={{fontSize: 18}}
+                    >
+                        {'Coins List'}
+                    </Link>
                     <Box sx={{flex: 1}}/>
                     <Link
                         variant='h6'
