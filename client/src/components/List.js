@@ -1,17 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Typography from '../components/Typography';
 import axios from 'axios';
-
-const item = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    px: 5,
-};
 
 
 function List() {
@@ -34,18 +23,22 @@ function List() {
   };
 
   return (
-      <Box
-          component="section"
-          sx={{display: 'flex', overflow: 'hidden', bgcolor: 'secondary.light'}}
-      >
-          <Container sx={{mt: 5, mb: 5, display: 'flex', position: 'relative'}}>
-              <Grid container>
-                  {list.forEach(element => {
-                    console.log(element);
-                  })}
-              </Grid>
-          </Container>
-      </Box>
+      <table>
+          <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Price</th>
+          </tr>
+
+          {list.map(element => (
+            <tr>
+                <td>{(element) ? element?.rank : ''}</td>
+                <td>{(element) ? element?.name : ''}</td>
+                <td>{(element) ? element?.price : ''}</td>
+            </tr>
+          ))}
+      </table>
+
   );
 }
 
