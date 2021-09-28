@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
                     symbol: coin.show_symbol,
                     name: coin.name,
                     rank: coin.rank,
-                    price: coin.price,
+                    price: formatNumber(coin.price),
                     delta_24h: coin.delta_24h
                 });
             });
@@ -61,11 +61,11 @@ app.get('/coin', (req, res) => {
                 symbol: data.symbol,
                 nom: data.name,
                 rang: data.rank,
-                prix: data.price,
-                volume_marche: data.market_cap,
-                volume_marche_24h: data.total_volume_24h,
-                prix_bas_24h: data.low_24h,
-                prix_haut_24h: data.high_24h,
+                prix: formatNumber(data.price),
+                volume_marche: formatNumber(data.market_cap),
+                volume_marche_24h: formatNumber(data.total_volume_24h),
+                prix_bas_24h: formatNumber(data.low_24h),
+                prix_haut_24h: formatNumber(data.high_24h),
                 delta_1h: data.delta_1h,
                 delta_24h: data.delta_24h,
                 delta_7d: data.delta_7d,
@@ -86,10 +86,10 @@ app.get('/global', (req, res) => {
             const data = results.data;
 
             res.send({
-                coins: data.coins,
-                markets: data.markets,
-                total_market_cap: Number(data.total_market_cap).toFixed(2),
-                total_volume_24h: Number(data.total_volume_24h).toFixed(2)
+                coins: formatNumber(data.coins),
+                markets: formatNumber(data.markets),
+                total_market_cap: formatNumber(data.total_market_cap),
+                total_volume_24h: formatNumber(data.total_volume_24h)
             });
         })
         .catch((error) => {
@@ -100,3 +100,11 @@ app.get('/global', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
+
+function formatNumber(x) {
+    x = Number(x);
+    x = x.toFixed(2);
+    x = Number(x);
+
+    return x.toLocaleString('en-EN');
+}

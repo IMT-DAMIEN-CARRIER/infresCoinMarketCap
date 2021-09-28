@@ -2,10 +2,10 @@ services:
   client:
     ports:
       - "3001:3001"
-    image: dams38/infrescoinmarketcap_client
+    image: dams38/infrescoinmarketcap_client:latest
     links:
       - api
   api:
-    image: dams38/infrescoinmarketcap_api
+    image: dams38/infrescoinmarketcap_api:latest
     ports:
       - "3000:3000"
