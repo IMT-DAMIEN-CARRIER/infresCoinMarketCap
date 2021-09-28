@@ -40,8 +40,7 @@ if (url === '/') {
 } else if (url === '/CoinsList/') {
   CoinsListIndex();
   console.log("coinslistindex");
-}
-else {
+} else {
   CoinIndex();
 }
 
