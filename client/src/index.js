@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import CoinsList from './CoinsList';
+import Coin from './Coin';
 import reportWebVitals from './reportWebVitals';
 
 function AppIndex() {
@@ -23,12 +24,25 @@ function CoinsListIndex() {
     );
 }
 
+function CoinIndex() {
+  ReactDOM.render(
+    <React.StrictMode>
+      <Coin />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
+
 var url = window.location.href.replace('http://localhost:3001','');
 
 if (url === '/') {
   AppIndex();
-} else {
+} else if (url === '/CoinsList/') {
   CoinsListIndex();
+  console.log("coinslistindex");
+}
+else {
+  CoinIndex();
 }
 
 
