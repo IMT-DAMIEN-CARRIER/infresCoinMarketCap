@@ -28,6 +28,7 @@ function List() {
               <th>Rank</th>
               <th>Name</th>
               <th>Price</th>
+              <th>Delta (24h)</th>
               <th></th>
           </tr>
 
@@ -36,6 +37,7 @@ function List() {
                 <td>{(element) ? element?.rank : ''}</td>
                 <td>{(element) ? element?.name : ''}</td>
                 <td>{(element) ? element?.price : ''}</td>
+                <td>{(element) ? element?.delta_24h : ''}</td>
                 <td><a href={'http://localhost:3001/coin?symbol=' + element.symbol} >
                     More
                 </a></td>
