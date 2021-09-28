@@ -28,6 +28,7 @@ function List() {
               <th>Rank</th>
               <th>Name</th>
               <th>Price</th>
+              <th></th>
           </tr>
 
           {list.map(element => (
@@ -35,6 +36,9 @@ function List() {
                 <td>{(element) ? element?.rank : ''}</td>
                 <td>{(element) ? element?.name : ''}</td>
                 <td>{(element) ? element?.price : ''}</td>
+                <td><a href={'http://localhost:3001/coin?symbol=' + element.symbol} >
+                    More
+                </a></td>
             </tr>
           ))}
       </table>
