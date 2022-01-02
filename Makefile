@@ -1,9 +1,9 @@
 PROJECT = "InfresCoinMarketCap"
 DELIMITER = "....."
 CLIENT_IMAGE_NAME = "infrescoinmarketcap_client_dev"
-CLIENT_CONTAINER_NAME = "client_dev"
+CLIENT_CONTAINER_NAME = "infrescoinmarketcap_client_1"
 API_IMAGE_NAME = "infrescoinmarketcap_api_dev"
-API_CONTAINER_NAME = "api_dev"
+API_CONTAINER_NAME = "infrescoinmarketcap_api_1"
 
 up: build-api run-api build-client run-client
 
